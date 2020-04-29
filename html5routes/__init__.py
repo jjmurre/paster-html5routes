@@ -17,7 +17,7 @@ class HTML5RoutesMiddleware(object):
         captured = []
         def capturing_start_response(status, headers, exc_info=None):
             if exc_info is not None:
-                raise exc_info[0], exc_info[1], exc_info[2]
+                raise exc_info[0].with_traceback( exc_info[1], exc_info[2])
             captured[:] = [status, headers, exc_info]
 
         # We are calling the enclosed app with our own start_response
